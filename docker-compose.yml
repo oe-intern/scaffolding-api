@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: shopify-app-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: postgres
+    ports:
+      - 3602:5432
+    networks:
+      - shopify-app
+
+  redis:
+    image: redis:latest
+    container_name: shopify-app-redis
+    restart: unless-stopped
+    environment:
+      SERVICE_TAGS: dev
+      SERVICE_NAME: redis
+    ports:
+      - 3603:6379
+    networks:
+      - shopify-app
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile-local
+    image: shopify-app
+    container_name: shopify-app-api
+    restart: unless-stopped
+    working_dir: /var/www/
+    ports:
+      - 3605:9000
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - shopify-app
+
+  nginx:
+    image: nginx:alpine
+    container_name: shopify-app-nginx
+    restart: unless-stopped
+    ports:
+      - 3601:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    depends_on:
+      - api
+    networks:
+      - shopify-app
+
+networks:
+  shopify-app:
+    driver: bridge
