@@ -27,5 +27,7 @@ RUN docker-php-ext-enable \
     redis
 
 RUN apk add --no-cache fcgi
+RUN apk add --no-cache bash
+RUN apk add --no-cache curl
 
 WORKDIR /var/www
