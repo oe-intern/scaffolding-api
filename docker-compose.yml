@@ -1,8 +1,8 @@
 version: "3.7"
 services:
-  postgres:
+  scaffolding-postgres:
     image: postgres:latest
-    container_name: shopify-app-postgres
+    container_name: scaffolding-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DB_DATABASE}
@@ -15,11 +15,11 @@ services:
     ports:
       - 6102:5432
     networks:
-      - shopify-app
+      - scaffolding
 
-  redis:
+  scaffolding-redis:
     image: redis:latest
-    container_name: shopify-app-redis
+    container_name: scaffolding-redis
     restart: unless-stopped
     environment:
       SERVICE_TAGS: dev
@@ -27,14 +27,14 @@ services:
     ports:
       - 6103:6379
     networks:
-      - shopify-app
+      - scaffolding
 
-  api:
+  scaffolding-api:
     build:
       context: ./
       dockerfile: Dockerfile-local
-    image: shopify-app
-    container_name: shopify-app-api
+    image: scaffolding
+    container_name: scaffolding-api
     restart: unless-stopped
     working_dir: /var/www/
     ports:
@@ -42,14 +42,14 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      - postgres
-      - redis
+      - scaffolding-postgres
+      - scaffolding-redis
     networks:
-      - shopify-app
+      - scaffolding
 
-  nginx:
+  scaffolding-nginx:
     image: nginx:alpine
-    container_name: shopify-app-nginx
+    container_name: scaffolding-nginx
     restart: unless-stopped
     ports:
       - 6101:80
@@ -57,10 +57,10 @@ services:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     depends_on:
-      - api
+      - scaffolding-api
     networks:
-      - shopify-app
+      - scaffolding
 
 networks:
-  shopify-app:
+  scaffolding:
     driver: bridge
