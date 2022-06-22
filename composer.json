@@ -7,6 +7,12 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ownego/laravel-shopify.git"
+        }
+    ],
     "require": {
         "php": "^7.2.5|^8.0",
         "encore/laravel-admin": "^1.8",
@@ -15,7 +21,7 @@
         "laravel/framework": "^6.20.26",
         "laravel/horizon": "^3.0",
         "laravel/tinker": "^2.5",
-        "osiset/laravel-shopify": "^14",
+        "osiset/laravel-shopify": "dev-laravel6",
         "predis/predis": "^1.1",
         "symfony/sendinblue-mailer": "^5.4",
         "tymon/jwt-auth": "^1.0"
@@ -66,5 +72,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
+    },
+    "stability-flags": {
+        "osiset/laravel-shopify": 20
     }
 }
