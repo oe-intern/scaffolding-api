@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d9b11d7f70dbe56a77ac31aeeb02fc5",
+    "content-hash": "03951d94428b267ed19cf50cb7e7fbce",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2763,16 +2763,16 @@
         },
         {
             "name": "osiset/laravel-shopify",
-            "version": "v14.0.3",
+            "version": "dev-laravel6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/osiset/laravel-shopify.git",
-                "reference": "2a60b239756a0280b63a6db405599fca10ee9658"
+                "url": "https://github.com/ownego/laravel-shopify.git",
+                "reference": "53a73db4d482a174237a833d99d37de9af7883fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/osiset/laravel-shopify/zipball/2a60b239756a0280b63a6db405599fca10ee9658",
-                "reference": "2a60b239756a0280b63a6db405599fca10ee9658",
+                "url": "https://api.github.com/repos/ownego/laravel-shopify/zipball/53a73db4d482a174237a833d99d37de9af7883fa",
+                "reference": "53a73db4d482a174237a833d99d37de9af7883fa",
                 "shasum": ""
             },
             "require": {
@@ -2800,14 +2800,23 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/ShopifyApp/helpers.php"
-                ],
                 "psr-4": {
                     "Osiset\\ShopifyApp\\": "src/ShopifyApp"
+                },
+                "files": [
+                    "src/ShopifyApp/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Osiset\\ShopifyApp\\Test\\": "tests"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2830,15 +2839,19 @@
             },
             "funding": [
                 {
-                    "url": "https://paypal.me/osiset",
-                    "type": "custom"
+                    "type": "github",
+                    "url": "https://github.com/osiset"
                 },
                 {
-                    "url": "https://opencollective.com/laravel-shopify",
-                    "type": "open_collective"
+                    "type": "open_collective",
+                    "url": "https://opencollective.com/laravel-shopify"
+                },
+                {
+                    "type": "custom",
+                    "url": "https://paypal.me/osiset"
                 }
             ],
-            "time": "2020-11-24T18:29:40+00:00"
+            "time": "2022-04-29T02:20:23+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -10290,12 +10303,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "osiset/laravel-shopify": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.2.5|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
