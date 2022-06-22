@@ -10,6 +10,8 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
     ports:
       - 6102:5432
     networks:
