@@ -1,7 +1,6 @@
 # Shopify App Backend Scaffolding
 ## Requirements
 Install docker and docker compose
-
 ## Setup
 Step 1: Copy .env.example to .env
 
@@ -16,7 +15,7 @@ SHOPIFY_API_SCOPES={your_api_scopes}
 
 Step 4: Run `docker-compose up -d`
 
-Step 5: Exec to shopify-app-api by `docker-compose exec api sh` and run following commands
+Step 5: Exec to shopify-app-api by `docker-compose exec -it scaffolding-api bash` and run following commands
 ```
 $ composer install
 $ php artisan key:generate
