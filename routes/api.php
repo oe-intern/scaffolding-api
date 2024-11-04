@@ -1,20 +1,7 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use Illuminate\Support\Facades\Route;
 
-Route::namespace('API')->name('api.')->group(function () {
-    Route::post('token/refresh', 'TokenController@refresh')->name('token.refresh');
-
-    Route::middleware('auth:api')->group(function () {
-        Route::get('user', 'UserController@show')->name('user.show');
-    });
+Route::group(['middleware' => ['access_control_headers', 'shopify.auth', 'verify.token']], function () {
+    //
 });
