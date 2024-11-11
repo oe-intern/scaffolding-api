@@ -6,6 +6,7 @@ use App\Contracts\Queries\User as UserQuery;
 use App\Contracts\Shopify\Graphql\Shop;
 use App\Objects\Values\UserId;
 use App\Services\Shopify\UserContext;
+use Illuminate\Support\Arr;
 
 class AfterAuthorize
 {
@@ -38,7 +39,14 @@ class AfterAuthorize
         $jobs = config('shopify-app.after_authenticate_jobs', []);
 
         foreach ($jobs as $job) {
-            $job::dispatch($user)
+            $class = Arr::get($job, 'class');
+            $inline = Arr::get($job, 'inline', false);
+            if ($inline) {
+                $class::dispatchSync($user);
+                continue;
+            }
+
+            $class::dispatch($user)
                 ->onQueue(config('shopify-app.job_queues.after_authenticate'));
         }
     }

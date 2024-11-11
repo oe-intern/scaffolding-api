@@ -58,6 +58,7 @@ return [
     'api_scopes' => env('SHOPIFY_API_SCOPES', implode(',', [
         'read_products',
         'read_customers',
+        'read_locales',
     ])),
 
     /*
@@ -66,7 +67,10 @@ return [
      |--------------------------------------------------------------------------
      */
     'after_authenticate_jobs' => [
-        \App\Jobs\UpdateUserProfile::class,
+        [
+            'class' => \App\Jobs\UpdateUserProfile::class,
+            'inline' => true,
+        ],
     ],
 
     /*
