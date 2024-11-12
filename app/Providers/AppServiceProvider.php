@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $host = str_replace('https://', '', env('HOST', 'not_defined'));
+        $host = str_replace('https://', '', config('app.embedded_url'));
 
         $customDomain = env('SHOP_CUSTOM_DOMAIN', null);
         Context::initialize(
@@ -67,7 +67,6 @@ class AppServiceProvider extends ServiceProvider
             (array)$customDomain,
         );
 
-        URL::forceRootUrl("https://$host");
         URL::forceScheme('https');
 
         Registry::addHandler(Topics::APP_UNINSTALLED, app(AppUninstalled::class));

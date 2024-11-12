@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authGuard('admin')
             ->middleware([
+                AdminCheck::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
@@ -69,7 +70,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                AdminCheck::class,
             ])
             ->login()
             ->profile()
